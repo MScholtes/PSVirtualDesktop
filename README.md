@@ -96,5 +96,7 @@ Get window handle of powershell console in a safe way (means: if powershell is s
 ### Get-ActiveWindowHandle
 Get window handle of foreground window (the foreground window is always on the current virtual desktop).
 ## Versions
+### 1.0.0, 2019-06-02
+First stable release (hope so)
 ### 0.0.0, 2019-05-20
 Test release
