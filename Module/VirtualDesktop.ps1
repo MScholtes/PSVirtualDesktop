@@ -1,5 +1,5 @@
 # Author: Markus Scholtes, 2017/05/08
-# Version 2.2 - new commands Move-ActiveWindow and Get-ActiveWindowHandle, 2019/02/13
+# Version 2.3 - fixed COM interface error with Pin-Application, 2019/06/03
 
 # prefer $PSVersionTable.BuildVersion to [Environment]::OSVersion.Version
 # since a wrong Windows version might be returned in RunSpaces
@@ -92,18 +92,20 @@ namespace VirtualDesktop
 	}
 
 	[ComImport]
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 // https://github.com/mzomparelli/zVirtualDesktop/wiki: Updated interfaces in Windows 10 build 17134, 17661, and 17666
 $(if ($Windows1607) {@"
 // Windows 10 1607 and Server 2016:
+	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 	[Guid("9AC0B5C8-1484-4C5B-9533-4134A0F97CEA")]
 "@ })
 $(if ($Windows1803) {@"
 // Windows 10 1803:
+	[InterfaceType(ComInterfaceType.InterfaceIsIInspectable)]
 	[Guid("871F602A-2B58-42B4-8C4B-6C43D642C06F")]
 "@ })
 $(if ($Windows1809) {@"
 // Windows 10 1809:
+	[InterfaceType(ComInterfaceType.InterfaceIsIInspectable)]
 	[Guid("372E1D3B-38D3-42E4-A15B-8AB2B178F513")]
 "@ })
 	internal interface IApplicationView
@@ -200,7 +202,11 @@ $(if ($Windows1809) {@"
 		int GetViewForApplication(object application, out IApplicationView view);
 		int GetViewForAppUserModelId(string id, out IApplicationView view);
 		int GetViewInFocus(out IntPtr view);
-		void outreshCollection();
+$(if ($Windows1803 -or $Windows1809) {@"
+// Windows 10 1803 and 1809:
+		int Unknown1(out IntPtr view);
+"@ })
+		void RefreshCollection();
 		int RegisterForApplicationViewChanges(object listener, out int cookie);
 $(if ($Windows1607) {@"
 // Windows 10 1607 and Server 2016:
