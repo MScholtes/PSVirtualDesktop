@@ -21,16 +21,16 @@ Get-Desktop 1 | Remove-Desktop
 Get-DesktopCount
 
 # Move notepad window to current virtual desktop
-(ps notepad).MainWindowHandle | Move-Window (Get-CurrentDesktop) | Out-Null
+(ps notepad)[0].MainWindowHandle | Move-Window (Get-CurrentDesktop) | Out-Null
 
 # Move powershell window to last virtual desktop and switch to it
 Get-Desktop ((Get-DesktopCount)-1) | Move-Window (Get-ConsoleHandle) | Switch-Desktop
 
 # Retrieve virtual desktop on which notepad runs and switch to it
-Get-DesktopFromWindow ((Get-Process "notepad").MainWindowHandle) | Switch-Desktop
+Get-DesktopFromWindow ((Get-Process "notepad")[0].MainWindowHandle) | Switch-Desktop
 
 # Pin notepad to all desktops
-Pin-Window ((Get-Process "notepad").MainWindowHandle)
+Pin-Window ((Get-Process "notepad")[0].MainWindowHandle)
 ```
 ## Installation
 
@@ -96,6 +96,8 @@ Get window handle of powershell console in a safe way (means: if powershell is s
 ### Get-ActiveWindowHandle
 Get window handle of foreground window (the foreground window is always on the current virtual desktop).
 ## Versions
+### 1.0.1, 2019-08-22
+Fixed examples
 ### 1.0.0, 2019-06-03
 First stable release (hope so)
 ### 0.0.0, 2019-05-20
