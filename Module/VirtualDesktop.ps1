@@ -1,5 +1,5 @@
 # Author: Markus Scholtes, 2017/05/08
-# Version 2.3 - fixed COM interface error with Pin-Application, 2019/06/03
+# Version 2.3.1 - fixed examples, 2019/08/22
 
 # prefer $PSVersionTable.BuildVersion to [Environment]::OSVersion.Version
 # since a wrong Windows version might be returned in RunSpaces
@@ -852,7 +852,7 @@ IntPtr
 .OUTPUTS
 Desktop object
 .EXAMPLE
-Get-DesktopFromWindow ((Get-Process "notepad").MainWindowHandle) | Switch-Desktop
+Get-DesktopFromWindow ((Get-Process "notepad")[0].MainWindowHandle) | Switch-Desktop
 
 Switch to virtual desktop with notepad window
 .LINK
@@ -1031,7 +1031,7 @@ Desktop object
 .OUTPUTS
 Desktop object
 .EXAMPLE
-Move-Window -Desktop (Get-CurrentDesktop) -Hwnd ((Get-Process "notepad").MainWindowHandle)
+Move-Window -Desktop (Get-CurrentDesktop) -Hwnd ((Get-Process "notepad")[0].MainWindowHandle)
 
 Move notepad window to current virtual desktop
 .EXAMPLE
@@ -1152,7 +1152,7 @@ Desktop object
 .OUTPUTS
 Boolean
 .EXAMPLE
-Test-Window -Hwnd ((Get-Process "notepad").MainWindowHandle)
+Test-Window -Hwnd ((Get-Process "notepad")[0].MainWindowHandle)
 
 Check if notepad window is displayed on current virtual desktop
 .EXAMPLE
@@ -1236,7 +1236,7 @@ IntPtr
 .OUTPUTS
 None
 .EXAMPLE
-Pin-Window ((Get-Process "notepad").MainWindowHandle)
+Pin-Window ((Get-Process "notepad")[0].MainWindowHandle)
 
 Pin notepad window to all desktops
 .LINK
@@ -1280,7 +1280,7 @@ IntPtr
 .OUTPUTS
 None
 .EXAMPLE
-Unpin-Window ((Get-Process "notepad").MainWindowHandle)
+Unpin-Window ((Get-Process "notepad")[0].MainWindowHandle)
 
 Unpin notepad window from all desktops
 .LINK
@@ -1324,7 +1324,7 @@ IntPtr
 .OUTPUTS
 Boolean
 .EXAMPLE
-Test-WindowPinned ((Get-Process "notepad").MainWindowHandle)
+Test-WindowPinned ((Get-Process "notepad")[0].MainWindowHandle)
 
 Checks whether notepad window is pinned to all virtual desktops
 .LINK
@@ -1370,7 +1370,7 @@ IntPtr
 .OUTPUTS
 None
 .EXAMPLE
-Pin-Application ((Get-Process "notepad").MainWindowHandle)
+Pin-Application ((Get-Process "notepad")[0].MainWindowHandle)
 
 Pin all notepad windows to all desktops
 .LINK
@@ -1414,7 +1414,7 @@ IntPtr
 .OUTPUTS
 None
 .EXAMPLE
-Unpin-Application ((Get-Process "notepad").MainWindowHandle)
+Unpin-Application ((Get-Process "notepad")[0].MainWindowHandle)
 
 Unpin all notepad windows from all desktops
 .LINK
@@ -1458,7 +1458,7 @@ IntPtr
 .OUTPUTS
 Boolean
 .EXAMPLE
-Test-ApplicationPinned ((Get-Process "notepad").MainWindowHandle)
+Test-ApplicationPinned ((Get-Process "notepad")[0].MainWindowHandle)
 
 Checks whether notepad windows are pinned to all virtual desktops
 .LINK
