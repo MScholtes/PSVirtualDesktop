@@ -22,7 +22,7 @@ Switch-Desktop $OldDesktop
 Sleep 1
 
 "Move notepad to current desktop"
-(ps notepad).MainWindowHandle | Move-Window (Get-CurrentDesktop) | Out-Null
+(ps notepad)[0].MainWindowHandle | Move-Window (Get-CurrentDesktop) | Out-Null
 
 Sleep 1
 
@@ -32,7 +32,7 @@ $NewDesktop | Move-Window (Get-ConsoleHandle) | Switch-Desktop
 Sleep 1
 
 "Pin notepad window to all desktops"
-Pin-Window ((Get-Process "notepad").MainWindowHandle)
+Pin-Window ((Get-Process "notepad")[0].MainWindowHandle)
 
 Sleep 1
 
