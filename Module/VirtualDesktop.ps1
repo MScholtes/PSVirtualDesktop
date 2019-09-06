@@ -1,5 +1,5 @@
 # Author: Markus Scholtes, 2017/05/08
-# Version 2.3.1 - fixed examples, 2019/08/22
+# Version 2.4 - new function Find-WindowHandle, 2019/09/04
 
 # prefer $PSVersionTable.BuildVersion to [Environment]::OSVersion.Version
 # since a wrong Windows version might be returned in RunSpaces
@@ -44,6 +44,8 @@ if ($OSBuild -ge 17661)
 
 Add-Type -Language CSharp -TypeDefinition @"
 using System;
+using System.Text;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
@@ -349,6 +351,11 @@ $(if ($Windows1803) {@"
 		}
 	}
 
+	public class WindowInformation
+	{ // stores window informations
+		public string Title { get; set; }
+		public int Handle { get; set; }
+	}
 
 	public class Desktop
 	{
@@ -539,13 +546,62 @@ $(if ($Windows1803) {@"
 			}
 		}
 
-		// Get window handle of current console window (even if powershell started in cmd)
+		// get window handle of current console window (even if powershell started in cmd)
 		[DllImport("Kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();
 
-		// Get handle of active window
+		// get handle of active window
 		[DllImport("user32.dll")]
 		public static extern IntPtr GetForegroundWindow();
+
+		// prepare callback function for window enumeration
+		private delegate bool CallBackPtr(int hwnd, int lParam);
+		private static CallBackPtr callBackPtr = Callback;
+		// list of window informations
+		private static List<WindowInformation> WindowInformationList = new List<WindowInformation>();
+
+		// enumerate windows
+		[DllImport("User32.dll", SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		private static extern bool EnumWindows(CallBackPtr lpEnumFunc, IntPtr lParam);
+
+		// get window title length
+		[DllImport("User32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		private static extern int GetWindowTextLength(IntPtr hWnd);
+
+		// get window title
+		[DllImport("User32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+		// callback function for window enumeration
+		private static bool Callback(int hWnd, int lparam)
+		{
+			int length = GetWindowTextLength((IntPtr)hWnd);
+			if (length > 0)
+			{
+				StringBuilder sb = new StringBuilder(length + 1);
+				if (GetWindowText((IntPtr)hWnd, sb, sb.Capacity) > 0)
+				{ WindowInformationList.Add(new WindowInformation {Handle = hWnd, Title = sb.ToString()}); }
+			}
+			return true;
+		}
+
+		// get list of all windows with title
+		public static List<WindowInformation> GetWindows()
+		{
+			WindowInformationList = new List<WindowInformation>();
+			EnumWindows(callBackPtr, IntPtr.Zero);
+			return WindowInformationList;
+		}
+
+		// find first window with string in title
+		public static WindowInformation FindWindow(string WindowTitle)
+		{
+			WindowInformationList = new List<WindowInformation>();
+			EnumWindows(callBackPtr, IntPtr.Zero);
+			WindowInformation result = WindowInformationList.Find(x => x.Title.IndexOf(WindowTitle, StringComparison.OrdinalIgnoreCase) >= 0);
+			return result;
+		}
 	}
 }
 "@
@@ -1540,4 +1596,57 @@ Author: Markus Scholtes
 Created: 2019/02/13
 #>
 	return [VirtualDesktop.Desktop]::GetForegroundWindow()
+}
+
+function Find-WindowHandle
+{
+<#
+.SYNOPSIS
+Find window handle to title text or retrieve list of windows with title
+.DESCRIPTION
+Find first window handle to partial title text (not case sensitive) or retrieve list of windows with title if *
+is supplied as title
+.PARAMETER Title
+Partial window title or *. The search is not case sensitive.
+.INPUTS
+STRING
+.OUTPUTS
+Int or Array of WindowInformation
+.EXAMPLE
+Find-WindowHandle powershell
+
+Get window handle of first powershell window
+.EXAMPLE
+Find-WindowHandle *
+
+Get a list of all windows with title
+.EXAMPLE
+Find-WindowHandle * | ? { $_.Title -match "firefox" }
+
+Find all windows that contain the text "firefox" in their title
+.LINK
+https://gallery.technet.microsoft.com/scriptcenter/Powershell-commands-to-d0e79cc5
+.NOTES
+Author: Markus Scholtes
+Created: 2019/09/04
+#>
+	[Cmdletbinding()]
+	Param([Parameter(ValueFromPipeline = $TRUE)] $Title)
+
+	if ($Title -eq "*")
+	{
+		return [VirtualDesktop.Desktop]::GetWindows()
+	}
+	else
+	{
+		$RESULT = [VirtualDesktop.Desktop]::FindWindow($Title)
+		if ($RESULT)
+		{
+			return $RESULT.Handle
+		}
+		else
+		{
+			return 0
+		}
+	}
 }
