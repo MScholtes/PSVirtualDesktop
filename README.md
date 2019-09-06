@@ -95,7 +95,11 @@ Checks whether an application whose window handle is given is pinned to all desk
 Get window handle of powershell console in a safe way (means: if powershell is started in a cmd window, the cmd window handle is returned).
 ### Get-ActiveWindowHandle
 Get window handle of foreground window (the foreground window is always on the current virtual desktop).
+### Find-WindowHandle
+Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 ## Versions
+### 1.1.0, 2019-09-04
+New function Find-WindowHandle
 ### 1.0.1, 2019-08-22
 Fixed examples
 ### 1.0.0, 2019-06-03
