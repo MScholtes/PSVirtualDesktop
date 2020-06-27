@@ -1,6 +1,7 @@
 # VirtualDesktop
 VirtualDesktop is a Powershell module that provides commandlets to manage virtual desktops of Windows 10.
 
+**Now with support for desktop names introduced with Windows 10 2004!**
 
 * New-Desktop, Switch-Desktop, Remove-Desktop to control desktops
 * Get-DesktopCount, Get-DesktopList, Get-CurrentDesktop, Get-Desktop and others to query desktops
@@ -9,6 +10,7 @@ VirtualDesktop is a Powershell module that provides commandlets to manage virtua
 and other commandlets
 
 By Markus Scholtes, 2020
+
 ## Sample Session
 ```powershell
 # Create a new virtual desktop and switch to it
