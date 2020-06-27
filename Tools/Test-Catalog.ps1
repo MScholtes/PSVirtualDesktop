@@ -11,4 +11,12 @@ if (Get-Command Test-FileCatalog -EA SilentlyContinue)
 	{ # cancel because files have been changed
 		Write-Error "Cannot load module because files have been modified"
 	}
+	else
+	{
+		Write-Output "Integrity check ok"
+	}
+}
+else
+{
+	Write-Warning "Need Powershell 5.1 to check"
 }
