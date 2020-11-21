@@ -11,6 +11,12 @@ and other commandlets
 
 By Markus Scholtes, 2020
 
+## Not compatible with Powershell Core
+Help is appreciated:
+
+* MarshalAs(UnmanagedType.HString) works with Powershell Core 7.0, but not with 7.1 (???)
+* How can I call methods of the assembly "Microsoft.Win32.Registry" with Add-Type?
+
 ## Sample Session
 ```powershell
 # Create a new virtual desktop and switch to it
