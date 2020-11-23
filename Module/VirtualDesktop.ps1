@@ -1320,7 +1320,7 @@ Author: Markus Scholtes
 Created: 2020/06/27
 #>
 	[Cmdletbinding()]
-	Param([Parameter(ValueFromPipeline = $TRUE)] $Desktop, [Parameter(ValueFromPipeline = $FALSE)] $Name)
+	Param([Parameter(ValueFromPipeline = $TRUE)] $Desktop, [Parameter(ValueFromPipeline = $FALSE)] $Name, [SWITCH] $PassThru)
 
 	if ($NULL -eq $Name) { $Name = "" }
 
@@ -1331,6 +1331,7 @@ Created: 2020/06/27
 		else
 		{ Write-Verbose "Remove name of desktop number $([VirtualDesktop.Desktop]::FromDesktop($Desktop)) ('$([VirtualDesktop.Desktop]::DesktopNameFromDesktop($Desktop))')" }
 		$Desktop.SetName($Name)
+		$Result = $Desktop
 	}
 	else
 	{
@@ -1345,6 +1346,7 @@ Created: 2020/06/27
 				{ Write-Verbose "Remove name of desktop number $([VirtualDesktop.Desktop]::FromDesktop($TempDesktop)) ('$([VirtualDesktop.Desktop]::DesktopNameFromDesktop($TempDesktop))')" }
 				$TempDesktop.SetName($Name)
 			}
+			$Result = $TempDesktop
 		}
 		else
 		{
@@ -1353,11 +1355,13 @@ Created: 2020/06/27
 				$TempIndex = [VirtualDesktop.Desktop]::SearchDesktop($Desktop)
 				if ($TempIndex -ge 0)
 				{
+					$TempDesktop = [VirtualDesktop.Desktop]::FromIndex($TempIndex)
 					if ($Name -ne "")
-					{ Write-Verbose "Set name of desktop number $([VirtualDesktop.Desktop]::FromDesktop(([VirtualDesktop.Desktop]::FromIndex($TempIndex)))) ('$([VirtualDesktop.Desktop]::DesktopNameFromDesktop([VirtualDesktop.Desktop]::FromIndex($TempIndex)))') to '$Name'" }
+					{ Write-Verbose "Set name of desktop number $([VirtualDesktop.Desktop]::FromDesktop($TempDesktop)) ('$([VirtualDesktop.Desktop]::DesktopNameFromDesktop($TempDesktop))') to '$Name'" }
 					else
-					{ Write-Verbose "Remove name of desktop number $([VirtualDesktop.Desktop]::FromDesktop(([VirtualDesktop.Desktop]::FromIndex($TempIndex)))) ('$([VirtualDesktop.Desktop]::DesktopNameFromDesktop([VirtualDesktop.Desktop]::FromIndex($TempIndex)))')" }
-					([VirtualDesktop.Desktop]::FromIndex($TempIndex)).Setname($Name)
+					{ Write-Verbose "Remove name of desktop number $([VirtualDesktop.Desktop]::FromDesktop($TempDesktop)) ('$([VirtualDesktop.Desktop]::DesktopNameFromDesktop($TempDesktop))')" }
+					$TempDesktop.Setname($Name)
+					$Result = $TempDesktop
 				}
 				else
 				{
@@ -1369,6 +1373,10 @@ Created: 2020/06/27
 				Write-Error "Parameter -Desktop has to be a desktop object, an integer or a string"
 			}
 		}
+	}
+	if ($PassThru)
+	{
+		return $Result
 	}
 }
 
