@@ -11,6 +11,10 @@ and other commandlets
 
 By Markus Scholtes, 2020
 
+Now Virtualdesktop is compatible with Powershell Core 7.0!
+
+The commandlet Set-DesktopName does not work with Powershell Core 7.1 (because Powershell Core 7.1 does not support the type HString ???), help is requested...
+
 ## Sample Session
 ```powershell
 # Create a new virtual desktop and switch to it
