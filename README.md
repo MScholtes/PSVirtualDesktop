@@ -11,12 +11,6 @@ and other commandlets
 
 By Markus Scholtes, 2020
 
-## Not compatible with Powershell Core
-Help is appreciated:
-
-* MarshalAs(UnmanagedType.HString) works with Powershell Core 7.0, but not with 7.1 (???)
-* How can I call methods of the assembly "Microsoft.Win32.Registry" with Add-Type?
-
 ## Sample Session
 ```powershell
 # Create a new virtual desktop and switch to it
@@ -79,8 +73,8 @@ Get virtual desktop with index number (0 to count-1). Returns desktop object.
 Get index number (0 to count-1) of virtual desktop. Returns integer or -1 if not found.
 ### Get-DesktopName -Desktop desktop
 Get name of virtual desktop. Returns string.
-### Set-DesktopName -Desktop desktop -Name name
-Set name of virtual desktop to name. Works only on Windows 10 2004 or up.
+### Set-DesktopName -Desktop desktop -Name name -PassThru
+Set name of virtual desktop to name. Works only on Windows 10 2004 or up and not with Powershell Core 7.1!
 ### Get-DesktopFromWindow -Hwnd hwnd
 Get virtual desktop of window (whose window handle is passed). Returns desktop object.
 ### Test-CurrentDesktop -Desktop desktop
@@ -122,6 +116,9 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.3.0, 2020-11-28
+- compatible to Powershell Core 7.0 (but not 7.1)
+- parameter -PassThru for Set-DesktopName (by sirAndros)
 ### 1.2.0, 2020-06-27
 - support for desktop names introduced with Win 10 2004
 - new functions Get-DesktopList, Get-DesktopName and Set-DesktopName
