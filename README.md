@@ -13,7 +13,10 @@ By Markus Scholtes, 2020
 
 Now Virtualdesktop is compatible with Powershell Core 7.0!
 
-The commandlet Set-DesktopName does not work with Powershell Core 7.1 (because Powershell Core 7.1 does not support the type HString ???), help is requested...
+_The commandlet Set-DesktopName does not work with Powershell Core 7.1 (because Powershell Core 7.1 does not support the type HString ???), help is requested..._
+
+_The commandlet Move-Window does not work with Powershell Core 7.1, help is requested..._
+
 
 ## Sample Session
 ```powershell
