@@ -54,7 +54,7 @@ PS C:\> Install-Module VirtualDesktop
 ```
 or download from here: https://www.powershellgallery.com/packages/VirtualDesktop/.
 
-Also look for the script based version here [Powershell commands to manage virtual desktops of Windows 10](https://gallery.technet.microsoft.com/scriptcenter/Powershell-commands-to-d0e79cc5).
+Also look for the script based version here [Powershell commands to manage virtual desktops of Windows 10](https://github.com/MScholtes/TechNet-Gallery).
 
 ## List Of Commands
 In most commands you can use a desktop object, the desktop number or a part of the desktop name as parameter desktop, see online help for more information.
