@@ -9,14 +9,7 @@ VirtualDesktop is a Powershell module that provides commandlets to manage virtua
 
 and other commandlets
 
-By Markus Scholtes, 2020
-
-Now Virtualdesktop is compatible with Powershell Core 7.0!
-
-_The commandlet Set-DesktopName does not work with Powershell Core 7.1 (because Powershell Core 7.1 does not support the type HString ???), help is requested..._
-
-_The commandlet Move-Window does not work with Powershell Core 7.1, help is requested..._
-
+By Markus Scholtes, 2021
 
 ## Sample Session
 ```powershell
@@ -54,7 +47,7 @@ PS C:\> Install-Module VirtualDesktop
 ```
 or download from here: https://www.powershellgallery.com/packages/VirtualDesktop/.
 
-Also look for the script based version here [Powershell commands to manage virtual desktops of Windows 10](https://github.com/MScholtes/TechNet-Gallery).
+Also look for the script based version here [Powershell commands to manage virtual desktops of Windows 10](https://github.com/MScholtes/TechNet-Gallery/tree/master/VirtualDesktop).
 
 ## List Of Commands
 In most commands you can use a desktop object, the desktop number or a part of the desktop name as parameter desktop, see online help for more information.
@@ -123,6 +116,8 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.3.1, 2021-02-28
+- fixes for Get-DesktopIndex
 ### 1.3.0, 2020-11-28
 - compatible to Powershell Core 7.0 (but not 7.1)
 - parameter -PassThru for Set-DesktopName (by sirAndros)
