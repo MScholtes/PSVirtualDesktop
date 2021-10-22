@@ -90,7 +90,7 @@ FunctionsToExport = @(
 	'Get-DesktopIndex',
 	'Get-DesktopName',
 	'Set-DesktopName',
-	'Set-DesktopWallpaper'.
+	'Set-DesktopWallpaper',
 	'Set-AllDesktopWallpapers',
 	'Get-DesktopFromWindow',
 	'Test-CurrentDesktop',
