@@ -135,6 +135,8 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.1, 2022-07-29
+- bug fix: desktop for pinned windows and apps are recognized, 2022/07/29
 ### 1.5.0, 2022-03-16
 - support for Powershell Core
 - support for Windows Server 2022
