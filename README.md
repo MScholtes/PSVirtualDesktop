@@ -136,7 +136,7 @@ Find first window handle to title text or retrieve list of windows with title (w
 
 ## Versions
 ### 1.5.1, 2022-07-29
-- bug fix: desktop for pinned windows and apps are recognized, 2022/07/29
+- bug fix: desktop for pinned windows and apps are recognized
 ### 1.5.0, 2022-03-16
 - support for Powershell Core
 - support for Windows Server 2022
