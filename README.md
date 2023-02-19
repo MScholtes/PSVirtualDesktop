@@ -18,7 +18,7 @@ VirtualDesktop is a Powershell module that provides commandlets to manage virtua
 
 and other commandlets
 
-By Markus Scholtes, 2022
+By Markus Scholtes, 2023
 
 ## Sample Session
 ```powershell
@@ -135,6 +135,8 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.2, 2023-02-19
+- support for Windows 11 Insider 25276+
 ### 1.5.1, 2022-07-29
 - bug fix: desktop for pinned windows and apps are recognized
 ### 1.5.0, 2022-03-16
