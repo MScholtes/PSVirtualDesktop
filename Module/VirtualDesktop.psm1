@@ -2,8 +2,8 @@
 .SYNOPSIS
 VirtualDesktop is a module that provides commandlets to manage virtual desktops of Windows 10 and 11.
 .NOTES
-Version: 1.5.2
-Date: 2023-02-19
+Version: 1.5.3
+Date: 2023-06-11
 Author: Markus Scholtes
 #>
 
