@@ -135,6 +135,9 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.4, 2023-08-27
+- integration of Win 11 22H2 Build 22621.2215 and Insider versions
+- Remove-AllDesktops without function on Win 11 22H2 Build 22621.2215 and Insider versions (will soon be fixed)
 ### 1.5.3, 2023-06-11
 - no flashing icons after switch desktops
 ### 1.5.2, 2023-02-19
