@@ -1,7 +1,7 @@
 # VirtualDesktop
 VirtualDesktop is a Powershell module that provides commandlets to manage virtual desktops of Windows 10 and Windows 11.
 
-**Now with support for Windows 11 including Insider**
+**Now with support for Windows 11 including Insider Canary**
 
 **Now with support for Windows Server 2022**
 
@@ -14,7 +14,7 @@ VirtualDesktop is a Powershell module that provides commandlets to manage virtua
 * Get-DesktopCount, Get-DesktopList, Get-CurrentDesktop, Get-Desktop and others to query desktops
 * Move-Window, (Un)Pin-Window, (Un)Pin-Application to control windows on desktops
 * only Windows 10 2004 and up: Get-DesktopName and Set-DesktopName
-* only Windows 11: Move-Desktop, Remove-AllDesktops, Set-DesktopWallpaper and Set-AllDesktopWallpapers
+* only Windows 11: Move-Desktop, Set-DesktopWallpaper and Set-AllDesktopWallpapers
 
 and other commandlets
 
@@ -77,7 +77,7 @@ Windows on the desktop to be removed are moved to the virtual desktop to the lef
 second desktop is used instead. If the current desktop is removed, this fallback desktop is activated too.
 If no parameter is supplied, the last desktop is removed.
 ### Remove-AllDesktops
-Remove all virtual desktops but visible. Works only with Windows 11.
+Remove all virtual desktops but visible.
 ### Get-CurrentDesktop
 Get current virtual desktop as desktop object.
 ### Get-Desktop -Index index
@@ -135,6 +135,9 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.6, 2023-09-18
+- bug fix for Win 11 Insider Canary
+- Remove-AllDesktops for all versions
 ### 1.5.5, 2023-09-02
 - bug fix for Win 11 22H2 Build 22621.2215
 ### 1.5.4, 2023-08-27
