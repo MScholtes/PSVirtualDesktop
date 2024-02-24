@@ -1,7 +1,7 @@
 # VirtualDesktop
 VirtualDesktop is a Powershell module that provides commandlets to manage virtual desktops of Windows 10 and Windows 11.
 
-**Now with support for Windows 11 including Insider Canary**
+**Now with support for Windows 11 including Insider up to Dev Channel**
 
 **Now with support for Windows Server 2022**
 
