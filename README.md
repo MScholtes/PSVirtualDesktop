@@ -1,7 +1,7 @@
 # VirtualDesktop
 VirtualDesktop is a Powershell module that provides commandlets to manage virtual desktops of Windows 10 and Windows 11.
 
-**Now with support for Windows 11 including Insider up to Dev Channel**
+**Now with support for Windows 11 including Insider up to 24H2**
 
 **Now with support for Windows Server 2022**
 
@@ -135,6 +135,9 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.9, 2024-09-01
+- faster API call FindWindow
+- Windows 11: animated switch to new desktop
 ### 1.5.8, 2024-05-26
 - changes for Win 11 24H2 and fixing of messages
 ### 1.5.7, 2024-02-15
