@@ -70,9 +70,9 @@ Show list of virtual desktops
 ### New-Desktop
 Create virtual desktop. Returns desktop object.
 ### Switch-Desktop -Desktop desktop -NoAnimation
-Switch to virtual desktop. Parameter is number of desktop (starting with 0 to count-1) or desktop object. Parameter -NoAnimation only on Windows 11.
+Switch to virtual desktop. Parameter is number of desktop (starting with 0 to count-1), desktop object or string (part of desktop name). Parameter -NoAnimation only on Windows 11.
 ### Remove-Desktop -Desktop desktop
-Remove virtual desktop. Parameter is number of desktop (starting with 0 to count-1) or desktop object.
+Remove virtual desktop. Parameter is number of desktop (starting with 0 to count-1), desktop object or string (part of desktop name).
 Windows on the desktop to be removed are moved to the virtual desktop to the left except for desktop 0 where the
 second desktop is used instead. If the current desktop is removed, this fallback desktop is activated too.
 If no parameter is supplied, the last desktop is removed.
