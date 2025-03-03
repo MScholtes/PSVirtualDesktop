@@ -18,7 +18,7 @@ VirtualDesktop is a Powershell module that provides commandlets to manage virtua
 
 and other commandlets
 
-By Markus Scholtes, 2024
+By Markus Scholtes, 2025
 
 ## Sample Session
 ```powershell
@@ -69,8 +69,8 @@ Get count of virtual desktops
 Show list of virtual desktops
 ### New-Desktop
 Create virtual desktop. Returns desktop object.
-### Switch-Desktop -Desktop desktop
-Switch to virtual desktop. Parameter is number of desktop (starting with 0 to count-1) or desktop object.
+### Switch-Desktop -Desktop desktop -NoAnimation
+Switch to virtual desktop. Parameter is number of desktop (starting with 0 to count-1) or desktop object. Parameter -NoAnimation only on Windows 11.
 ### Remove-Desktop -Desktop desktop
 Remove virtual desktop. Parameter is number of desktop (starting with 0 to count-1) or desktop object.
 Windows on the desktop to be removed are moved to the virtual desktop to the left except for desktop 0 where the
@@ -117,8 +117,12 @@ Check if window whose handle is passed is displayed on virtual desktop. Returns 
 The parameter values are auto detected and can change places. If parameter desktop is not supplied, the current desktop is used.
 ### Pin-Window -Hwnd hwnd
 Pin window whose window handle is given to all desktops.
+### Pin-ActiveWindow
+Pin active window to all desktops.
 ### Unpin-Window -Hwnd hwnd
 Unpin window whose window handle is given to all desktops.
+### Unpin-ActiveWindow
+Unpin active window from all desktops.
 ### Test-WindowPinned -Hwnd hwnd
 Checks whether a window whose window handle is given is pinned to all desktops. Returns boolean.
 ### Pin-Application -Hwnd hwnd
@@ -135,6 +139,9 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.10, 2025-03-03
+- new commands Pin-ActiveWindow and Unpin-ActiveWindow
+- Windows 11: parameter -NoAnimation for Switch-Desktop
 ### 1.5.9, 2024-09-01
 - faster API call FindWindow
 - Windows 11: animated switch to new desktop
