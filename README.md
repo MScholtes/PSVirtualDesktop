@@ -139,6 +139,9 @@ Get window handle of foreground window (the foreground window is always on the c
 Find first window handle to title text or retrieve list of windows with title (when called with * as parameter)
 
 ## Versions
+### 1.5.11, 2025-08-25
+- bugfix for Windows 11: fixes Windows Explorer crash
+- bugfix for Windows 11: fixes missing activiation after desktop switch
 ### 1.5.10, 2025-03-03
 - new commands Pin-ActiveWindow and Unpin-ActiveWindow
 - Windows 11: parameter -NoAnimation for Switch-Desktop
